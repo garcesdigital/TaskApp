@@ -1,0 +1,38 @@
+<ion-content  padding>
+  <form #registerForm="ngForm" (ngSubmit)="onSubmit();registerForm.reset();">
+    <ion-grid>
+      <ion-row color="primary" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center class="color-text">
+            <h3>Formulario de Registro</h3>
+          </div>
+          <div padding>
+            <ion-item>
+              <ion-label position="floating">Nombres</ion-label>
+              <ion-input type="text" name="name" #name="ngModel" [(ngModel)]="user.name" required></ion-input>
+              <span *ngIf="!name.valid && name.touched">El nombre es obligatorio</span>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Apellidos</ion-label>
+              <ion-input type="text" name="surname" #surname="ngModel" [(ngModel)]="user.surname" required></ion-input>
+              <span *ngIf="!surname.valid && surname.touched">Los apellidos son obligatorios</span>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Email</ion-label>
+              <ion-input type="text" name="email" #email="ngModel" [(ngModel)]="user.email" required></ion-input>
+              <span *ngIf="!email.valid && email.touched">El email es obligatorio</span>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Contraseña</ion-label>
+              <ion-input type="password" name="password" #password="ngModel" [(ngModel)]="user.password"></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="!registerForm.form.valid" expand="block">Registrarse
+            </ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

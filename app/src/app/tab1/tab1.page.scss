@@ -1,0 +1,22 @@
+.welcome-card ion-img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+#notification-button {            
+  position: relative;
+  width: 42px;
+  top:1px;
+  right: 1px;
+  overflow: visible!important;
+}
+
+
+ion-segment-button{
+  ion-badge{
+    position: absolute;
+    top: 1px;
+    right: 0px;
+    border-radius: 100%;
+  }
+}

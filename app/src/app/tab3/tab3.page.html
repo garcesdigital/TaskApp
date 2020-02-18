@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Ajustes
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form #updateForm="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Nombres</ion-label>
+      <ion-input type="text" placeholder="Nombres" name="name" #name="ngModel" [(ngModel)]="user.name"
+        required></ion-input>
+      <span *ngIf="!name.valid && name.touched">El nombre es obligatorio</span>
+    </ion-item>
+    <ion-item>
+        <ion-label position="floating">Apellidos</ion-label>
+        <ion-input type="text" placeholder="Apellidos" name="surname" #surname="ngModel" [(ngModel)]="user.surname" required></ion-input>
+          <span *ngIf="!surname.valid && surname.touched">Los apellidos son obligatorios</span>
+      </ion-item>
+      <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="text" placeholder="Correo Electrónico" name="email" #email="ngModel" [(ngModel)]="user.email" required></ion-input>
+          <span *ngIf="!email.valid && email.touched">El email es obligatorio</span>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" placeholder="Contraseña" name="password" #password="ngModel" [(ngModel)]="user.password"></ion-input>
+          </ion-item>
+          <ion-button type="submnit" [disabled]="!updateForm.form.valid" color="primary" expand="block">{{title}}</ion-button>
+  </form>
+</ion-content>

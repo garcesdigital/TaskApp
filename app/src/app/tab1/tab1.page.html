@@ -1,0 +1,71 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="primary">
+			<ion-button color="danger" shape="round" [routerLink]="['/login', 1]">
+				<ion-icon name="log-out"></ion-icon>
+			</ion-button>
+		</ion-buttons>
+		<ion-title *ngIf="identity && identity.sub"> Bienvenido {{identity.name}}</ion-title>
+	</ion-toolbar>
+
+</ion-header>
+<ion-searchbar animated="true" placeholder="Buscar una tarea" name="searchString" [(ngModel)]="searchString"
+	(change)="search()"></ion-searchbar>
+
+<ion-content>
+	<ion-item>
+		<ion-segment (ionChange)="search()" name="filter" [(ngModel)]="filter" scrollable="true" color="primary">
+			<ion-segment-button value="0" layout="icon-start">
+				<ion-label>Sin Filtro</ion-label>
+				<ion-icon name="checkbox"></ion-icon>
+			</ion-segment-button>
+			<ion-segment-button value="1" layout="icon-start">
+				<ion-label>Nuevas</ion-label>
+				<ion-badge color="danger">{{tnuevas}}</ion-badge>
+				<ion-icon name="copy"></ion-icon>
+			</ion-segment-button>
+			<ion-segment-button value="2" layout="icon-start">
+				<ion-label>Por Hacer</ion-label>
+				<ion-badge color="warning">{{tporhacer}}</ion-badge>
+				<ion-icon name="eye"></ion-icon>
+			</ion-segment-button>
+			<ion-segment-button value="3" layout="icon-start">
+				<ion-label>Acabadas</ion-label>
+				<ion-badge color="primary">{{tacabadas}}</ion-badge>
+				<ion-icon name="heart"></ion-icon>
+			</ion-segment-button>
+		</ion-segment>
+	</ion-item>
+	
+	<ion-card *ngFor="let task of tasks" class="task-item" (click)="presentActionSheet(task.id)">
+		<ion-card-header>
+			<ion-card-subtitle>
+				<span *ngIf="task.status == 'finished'">
+					Acabada
+				</span>
+				<span *ngIf="task.status == 'todo'">
+					Por Hacer
+				</span>
+				<span *ngIf="task.status == 'new'">
+					Nueva
+				</span>
+			</ion-card-subtitle>
+			<ion-card-title>{{task.title}}</ion-card-title>
+		</ion-card-header>
+
+		<ion-card-content>
+			{{task.description}}
+		</ion-card-content>
+		<ion-row>
+			<ion-col align-self-center text-center>
+				<ion-note>
+
+				</ion-note>
+			</ion-col>
+		</ion-row>
+	</ion-card>
+	<ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+		<ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Cargando mas tareas...">
+		</ion-infinite-scroll-content>
+	</ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,33 @@
+<ion-content padding>
+	<form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+		<ion-grid>
+			<ion-row color="primary" justify-content-center>
+				<ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+					<div text-center class="color-text">
+						<h3>Identifícate</h3>
+					</div>
+					<div padding>
+						<ion-item>
+							<ion-input type="email" placeholder="Correo Electrónico" name="email" #email="ngModel"
+								[(ngModel)]="user.email" required></ion-input>
+							<span *ngIf="!email.valid && email.touched">El email no es válido</span>
+
+						</ion-item>
+						<ion-item>
+							<ion-input type="password" placeholder="Contraseña" name="password" #password="ngModel"
+								[(ngModel)]="user.password" required></ion-input>
+							<span *ngIf="!password.valid && password.touched">La contraseña no es válido</span>
+						</ion-item>
+					</div>
+					<div padding>
+						<ion-button size="large" type="submit" [disabled]="!loginForm.form.valid" expand="block">Acceder
+						</ion-button>
+					</div>
+					<div padding>
+						<ion-button size="large" [routerLink]="['/register']" expand="block">Regístrate Gratis</ion-button>
+					</div>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+	</form>
+</ion-content>

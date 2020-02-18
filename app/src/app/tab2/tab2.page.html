@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      {{page_title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <form #taskNewForm="ngForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="floating">Titulo</ion-label>
+      <ion-input type="text" placeholder="Colócale un titulo a la tarea" name="title" #title="ngModel"
+        [(ngModel)]="task.title" required></ion-input>
+      
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-textarea placeholder="Describe tu tarea" name="description" #description="ngModel"
+        [(ngModel)]="task.description"></ion-textarea>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Estado</ion-label>
+      <ion-select name="status" #status="ngModel" [(ngModel)]="task.status">
+        <ion-select-option value="new">Nueva</ion-select-option>
+        <ion-select-option value="todo">Para Hacer</ion-select-option>
+        <ion-select-option value="finished">Acabada</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button type="submit" color="primary" expand="block" [disabled]="!taskNewForm.form.valid">
+      <ion-icon name="checkmark"></ion-icon> {{page_title}}
+    </ion-button>
+  </form>
+</ion-content>
