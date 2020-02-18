@@ -1,0 +1,53 @@
+<div class="col-md-12">
+
+	<div class="loader" *ngIf="loading == 'show'">
+		<img src="assets/img/loader.gif" />
+	</div>
+
+	<div class="col-md-12" *ngIf="task || !loading">
+
+	<div class="card">
+	    <div class="card-header card-header-primary">
+	        <h4 class="card-title">{{page_title}}</h4>
+	        <p class="card-category">Completa los campos del formulario</p>
+	    </div>
+	    <div class="card-body">
+	    		
+		<div class="alert alert-success" *ngIf="status_task == 'success'">
+			¡La tarea se ha creado correctamente!
+		</div>
+
+		<div class="alert alert-danger" *ngIf="status_task == 'error'">
+			¡La tarea NO se ha creado!
+		</div>
+
+		<form #taskNewForm="ngForm" (ngSubmit)="onSubmit()" class="col-md-12 no-padding">
+			<p>
+				<label>Titulo</label>
+				<input type="text" class="form-control" name="title" #title="ngModel" [(ngModel)]="task.title" required />
+				<span *ngIf="!title.valid && title.touched">
+					El titulo no es correcto !!
+				</span>
+			</p>
+
+			<p>
+				<label>Descripción</label>
+				<textarea class="form-control" name="description" #description="ngModel" [(ngModel)]="task.description"></textarea>
+			</p>
+
+			<p>
+				<label>Estado</label>
+				<select class="form-control" name="status" #status="ngModel" [(ngModel)]="task.status">
+					<option value="new">Nueva</option>
+					<option value="todo">Para hacer</option>
+					<option value="finished">Acabada</option>
+				</select>
+			</p>
+
+			<input type="submit" value="{{page_title}}" class="btn btn-success" [disabled]="!taskNewForm.form.valid"/>
+		</form>
+	    </div>
+	</div>
+
+	</div>
+</div>
